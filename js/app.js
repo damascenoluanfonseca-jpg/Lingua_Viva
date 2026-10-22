@@ -14,3 +14,14 @@ if (switcher) {
         }
     });
 }
+async function buscarCEP(cep) {
+try {
+const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+if (!resposta.ok) throw new Error('CEP não encontrado');
+const dados = await resposta.json();
+document.getElementById('rua').textContent = dados.logradouro;
+} catch (erro) {
+document.getElementById('mensagem').textContent =
+'Não foi possível buscar o CEP.';
+}
+}
